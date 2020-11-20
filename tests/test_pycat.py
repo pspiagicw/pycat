@@ -1,5 +1,6 @@
 import unittest
 import os
+import time
 
 from pycat.main import get_arguments
 from pycat.main import cat_files
@@ -23,20 +24,24 @@ class TestPyCat(unittest.TestCase):
     def test_args(self)->None:
         arguments = '--version tags'.split()
         namespace = get_arguments(arguments)
+        time.sleep(1)
         self.assertTrue(namespace.version)
 
     def test_args2(self)->None:
         arguments = 'test_file'
+        time.sleep(1)
         namespace = get_arguments(arguments)
         self.assertEqual(namespace.files,list(arguments))
     def test_args3(self)->None:
         arguments = '--number test_file'.split()
+        time.sleep(1)
         namespace = get_arguments(arguments)
         self.assertTrue(namespace.number)
         self.assertEqual(namespace.files,['test_file'])
 
     def test_reading(self)->None:
         arguments = ['test_file']
+        time.sleep(1)
         args = get_arguments(arguments)
         files = process_arguments(args)
         contents = cat_files(files)
@@ -44,6 +49,7 @@ class TestPyCat(unittest.TestCase):
 
     def test_formatting(self)->None:
         arguments = ['test_file']
+        time.sleep(1)
         args = get_arguments(arguments)
         files = process_arguments(args)
         contents = cat_files(files)
